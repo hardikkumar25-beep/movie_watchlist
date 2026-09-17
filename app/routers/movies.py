@@ -3,20 +3,7 @@ from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, HttpUrl, EmailStr
 from app.services.movie_services import search_movies,get_movie_details
 
-router = APIRouter(
-    prefix="/movies",
-    tags=["Movies"])
-
-class Movie(BaseModel):
-    id: int
-    title: str
-    description: str
-    genres: List[str]
-    release_year: int
-    rating: float
-    poster_url: HttpUrl
-
-movies_db={}
+router = APIRouter(prefix="/movies",tags=["Movies"])
 
 @router.get("")
 async def get_movies(query:str):

@@ -1,19 +1,21 @@
-.env
+
 venv/
 .venv/
+env/
+
+.env
+
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+
+.pytest_cache/
+
 .vscode/
-logs/*.log
+.idea/
 
 .DS_Store
 Thumbs.db
 
-build/
-dist/
-*.egg-info/
+*.log
 
-.pytest_cache/
-.ipynb_checkpoints/
+backend.md
