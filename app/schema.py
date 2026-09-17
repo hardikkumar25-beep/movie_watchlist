@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, HttpUrl, Field
 
 class UserCreate(BaseModel):
     username: str
@@ -19,3 +19,9 @@ class Movie(BaseModel):
     release_year: Optional[int]
     rating: float
     poster_url: Optional[HttpUrl]
+
+class WatchlistCreate(BaseModel):
+    user_id: int
+    movie_id: int
+    watched: bool = False
+    user_rating: Optional[int] = Field(None, ge=1, le=10)

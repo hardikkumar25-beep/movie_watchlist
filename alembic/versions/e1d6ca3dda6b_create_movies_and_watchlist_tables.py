@@ -1,8 +1,8 @@
 """create movies and watchlist tables
 
-Revision ID: 18cc291e7391
+Revision ID: e1d6ca3dda6b
 Revises: a970e938d6ad
-Create Date: 2026-09-18 00:29:26.429738
+Create Date: 2026-09-18 01:09:48.211075
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '18cc291e7391'
+revision: str = 'e1d6ca3dda6b'
 down_revision: Union[str, Sequence[str], None] = 'a970e938d6ad'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -26,15 +26,18 @@ def upgrade() -> None:
     sa.Column('tmdb_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=True),
-    sa.Column('release_date', sa.Integer(), nullable=True),
+    sa.Column('release_year', sa.Integer(), nullable=True),
     sa.Column('rating', sa.Float(), nullable=True),
     sa.Column('poster_url', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id', 'tmdb_id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('tmdb_id')
     )
     op.create_table('watchlist',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('movie_id', sa.Integer(), nullable=False),
+    sa.Column('watched', sa.Boolean(), nullable=True),
+    sa.Column('user_rating', sa.Integer(), nullable=True),
     sa.Column('added_at', sa.DateTime(), server_default=sa.text('now()'), nullable=True),
     sa.ForeignKeyConstraint(['movie_id'], ['movies.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
