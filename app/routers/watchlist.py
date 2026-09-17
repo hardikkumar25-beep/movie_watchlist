@@ -20,3 +20,4 @@ def add_to_watchlist(item:WatchlistCreate,db:Session=Depends(get_db)):
     db.refresh(new_entry)
     return new_entry
 
+#NOTE- have to add delete_from_Watchlist and view_watchlist func then when these are done do testing 
